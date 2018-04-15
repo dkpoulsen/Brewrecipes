@@ -1,0 +1,14 @@
+language: objective-c
+osx_image: xcode9.3
+xcode_sdk: iphonesimulator11.3
+xcode_project: Brewrecipes
+xcode_scheme: Brewrecipes
+before_install:
+- brew update
+- brew outdated carthage || brew upgrade carthage
+- gem install xcpretty
+before_script:
+- carthage bootstrap --platform iOS
+script:
+- xcodebuild clean && xcodebuild build -project Brewrecipes.xcodeproj -scheme Brewrecipes | xcpretty
+- xcodebuild test -project Brewrecipes.xcodeproj -scheme Brewrecipes -destination "platform=iOS Simulator,name=iPhone 7" | xcpretty

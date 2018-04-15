@@ -10,9 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let punk = PunkAPI()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        punk.search().subscribe(onNext : {
+            print($0)
+        }, onError :{
+            print($0)
+        })
     }
 
     override func didReceiveMemoryWarning() {

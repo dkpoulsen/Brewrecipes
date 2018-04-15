@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Brew recipes.xcodeproj">
+      location = "self:/Users/danielk.poulsen/Projects/Brew recipes/Brewrecipes.xcodeproj">
    </FileRef>
 </Workspace>
