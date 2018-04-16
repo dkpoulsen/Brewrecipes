@@ -14,21 +14,18 @@ struct PunkAPI : BrewAPI {
     
     static let Brews = "https://api.punkapi.com/v2/beers"
     
-    let session = URLSession.shared
+    let session : HTTPSession
+    
+    init(session : HTTPSession = URLSession.shared) {
+        self.session = session
+    }
     
     func search(search : [SearchFilters : String]? = nil) -> Observable<[Beer]>{
-        var urlString = PunkAPI.Brews
-        if let searchUnwrapped = search{
-            urlString += "?"
-            for s in searchUnwrapped{
-                guard s.value != "" else {break}
-                urlString += "\(s.key.rawValue)=\(s.value)&"
-            }
-        }
-        
-        let url = URL(string: urlString)!
-        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10)
-        return session.rx.data(request: request).map{
+        var component = URLComponents(string :PunkAPI.Brews)!
+        component.queryItems = search?.filter{$0.value.count > 1}.compactMap{URLQueryItem(name: $0.key.rawValue, value: $0.value)}
+
+        let request = URLRequest(url: component.url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10)
+        return session.get(from: request).map{
             let jsonDecoder = JSONDecoder()
             return try jsonDecoder.decode(Array<Beer>.self, from: $0)
         }

@@ -10,5 +10,11 @@ import Foundation
 import RxSwift
 
 protocol HTTPSession {
-    func get(from url : URL) -> Observable<Data>
+    func get(from request: URLRequest) -> Observable<Data>
+}
+
+extension URLSession : HTTPSession{
+    func get(from request: URLRequest) -> Observable<Data>{
+        return rx.data(request: request)
+    }
 }

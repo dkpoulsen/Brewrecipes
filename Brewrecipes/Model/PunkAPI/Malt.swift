@@ -6,5 +6,5 @@
 import Foundation
 struct Malt : Codable {
 	let name : String?
-	let amount : Amount?
+	let amount : Measurement<Unit>?
 }

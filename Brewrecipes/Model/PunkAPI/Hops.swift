@@ -6,7 +6,7 @@
 import Foundation
 struct Hops : Codable {
 	let name : String?
-	let amount : Amount?
+	let amount : Measurement<Unit>?
 	let add : String?
 	let attribute : String?
 
@@ -21,7 +21,7 @@ struct Hops : Codable {
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		name = try values.decodeIfPresent(String.self, forKey: .name)
-		amount = try Amount(from: decoder)
+		amount = try values.decodeIfPresent(Measurement<Unit>.self, forKey: .amount)
 		add = try values.decodeIfPresent(String.self, forKey: .add)
 		attribute = try values.decodeIfPresent(String.self, forKey: .attribute)
 	}
