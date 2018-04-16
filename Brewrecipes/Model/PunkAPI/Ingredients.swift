@@ -15,12 +15,4 @@ struct Ingredients : Codable {
 		case hops = "hops"
 		case yeast = "yeast"
 	}
-
-	init(from decoder: Decoder) throws {
-		let values = try decoder.container(keyedBy: CodingKeys.self)
-		malt = try values.decodeIfPresent([Malt].self, forKey: .malt)
-		hops = try values.decodeIfPresent([Hops].self, forKey: .hops)
-		yeast = try values.decodeIfPresent(String.self, forKey: .yeast)
-	}
-
 }

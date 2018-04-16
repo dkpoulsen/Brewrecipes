@@ -40,7 +40,6 @@ class BrewSearchTableViewController: UITableViewController {
         }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(Beer.self).asObservable().subscribe(onNext : { _ in
-            show(<#T##vc: UIViewController##UIViewController#>, sender: <#T##Any?#>)
         }).disposed(by: disposeBag)
     }
 

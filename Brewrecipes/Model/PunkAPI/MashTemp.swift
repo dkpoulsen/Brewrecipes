@@ -4,6 +4,7 @@
 //
 
 import Foundation
-struct Fermentation : Codable {
+struct MashTemp : Codable {
 	let temp : Temp?
+	let duration : Double?
 }

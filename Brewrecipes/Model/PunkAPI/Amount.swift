@@ -7,17 +7,4 @@ import Foundation
 struct Amount : Codable {
 	let value : Double?
 	let unit : String?
-
-	enum CodingKeys: String, CodingKey {
-
-		case value = "value"
-		case unit = "unit"
-	}
-
-	init(from decoder: Decoder) throws {
-		let values = try decoder.container(keyedBy: CodingKeys.self)
-		value = try values.decodeIfPresent(Double.self, forKey: .value)
-		unit = try values.decodeIfPresent(String.self, forKey: .unit)
-	}
-
 }
